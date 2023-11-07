@@ -28,7 +28,8 @@ body{
     font-size: 4rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center
+    ;
     transition:0.5;
 }
 #tile-0{
