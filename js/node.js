@@ -82,7 +82,7 @@ class TreeNode {
     });
     return heuristic
   }
-  
+
   hamming(){
     let heuristic = 0;
     this.state.split("").forEach((value,index) => {
@@ -93,7 +93,3 @@ class TreeNode {
     return heuristic
   }
 }
-
-const myNode = new TreeNode("123405678",1);
-console.log(myNode.expand());
-console.log(myNode);
