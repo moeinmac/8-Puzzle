@@ -46,8 +46,8 @@ class TreeNode {
 
     return AllNextStates;
   }
+  
   getActions() {
-    // Which Actions Are Available?
     const actions = [];
     const zero = this.state.indexOf("0");
     const col = zero % 3;
@@ -60,4 +60,40 @@ class TreeNode {
 
     return actions;
   }
+
+  expand(){
+    const expandedChilds = []
+    const nextStates = this.nextState();
+    nextStates.forEach((state)=>{
+      const tempNode = new TreeNode(state,this.depth + 1)
+      expandedChilds.push(tempNode)
+    })
+    return expandedChilds
+  }
+
+  manhattan (){
+    let heuristic = 0
+    this.state.split("").forEach((value,index) => {
+      if(value != "0"){
+        const gCol = index % 3 , gRow = ~~(index / 3)
+        const sCol = value % 3 , sRow = ~~(value / 3)
+        heuristic += Math.abs(gCol - sCol) + Math.abs(gRow - sRow)
+      }
+    });
+    return heuristic
+  }
+  
+  hamming(){
+    let heuristic = 0;
+    this.state.split("").forEach((value,index) => {
+      if(value != "0"){
+        if(value != index) heuristic += 1
+      }
+    })
+    return heuristic
+  }
 }
+
+const myNode = new TreeNode("123405678",1);
+console.log(myNode.expand());
+console.log(myNode);
