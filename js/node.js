@@ -1,13 +1,11 @@
 const GOAL_STATE = "012345678";
+let INITIAL_STATE = "120345678";
 
 class TreeNode {
-  constructor(state, depth) {
+  constructor(state, depth,parent=null) {
     this.state = state;
     this.depth = depth;
-  }
-
-  isGoal() {
-    return this.state === GOAL_STATE;
+    this.parent = parent
   }
 
   nextState() {
@@ -65,7 +63,7 @@ class TreeNode {
     const expandedChilds = []
     const nextStates = this.nextState();
     nextStates.forEach((state)=>{
-      const tempNode = new TreeNode(state,this.depth + 1)
+      const tempNode = new TreeNode(state,this.depth + 1,this)
       expandedChilds.push(tempNode)
     })
     return expandedChilds

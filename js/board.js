@@ -4,7 +4,6 @@ const tiles = Array.from(document.querySelectorAll(".tile"));
 const Board = {
   tiles,
   draw(gameState) {
-    console.log(gameState);
     gameState.split("").forEach((item, index) => {
       const col = index % 3;
       const row = ~~(index / 3);
@@ -15,4 +14,4 @@ const Board = {
   
 };
 
-document.addEventListener("DOMContentLoaded", Board.draw("012345678"));
+document.addEventListener("DOMContentLoaded", Board.draw(INITIAL_STATE));
