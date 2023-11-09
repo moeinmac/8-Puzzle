@@ -6,27 +6,28 @@ const search = (heuristic) => {
   while(currentNode.state !== GOAL_STATE){
     frontier = [...frontier, ...currentNode.expand()];
     expandedNodes.push(currentNode);
-    console.log({currentNode});
-    console.log({expandedNodes});
     frontier = filterFronier(frontier,expandedNodes[expandedNodes.length - 1]);
-    console.log({frontier});
 
     let bestNodeIndex;
     if(heuristic === "M") bestNodeIndex = findMinFByManhattan(frontier)
     else bestNodeIndex = findMinFByHamming(frontier)
-    console.log({"BEST" : frontier[bestNodeIndex]});
+
     currentNode = frontier[bestNodeIndex]
   }
-  Board.draw(currentNode.state)
+  const optimalPath = findOptimalPath(currentNode);
+  const opInt = setInterval(() => {
+    if(optimalPath.length <= 1) clearInterval(opInt)
+    Board.draw(optimalPath[0])
+    optimalPath.shift()
+  }, 500);
+  
   
 };
 
 const filterFronier = (frontier,lastExpanded) => {
-  console.log({lastExpanded});
-  const newFr = frontier.filter((node)=>{
+  return frontier.filter((node)=>{
     return node.state !== lastExpanded.state
   })
-  return newFr
 }
 
 const findMinFByManhattan = (frontier) => {
@@ -38,4 +39,22 @@ const findMinFByManhattan = (frontier) => {
   return frontier.indexOf(minNode)
 };
 
-const findMinFByHamming = (frontier) => {};
+const findMinFByHamming = (frontier) => {
+  let minNode = frontier[0];
+  frontier.forEach((node) => {
+    if (minNode.depth + minNode.hamming() > node.depth + node.hamming())
+      minNode = node;
+  });
+  return frontier.indexOf(minNode)
+};
+
+const findOptimalPath = (node) => {
+  const path = [];
+  let currentNode = node
+  while (currentNode.parent) {
+    path.unshift(currentNode.state);
+    currentNode = currentNode.parent
+  }
+  path.unshift(currentNode.state);
+  return path
+}

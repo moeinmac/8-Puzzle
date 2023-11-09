@@ -1,5 +1,5 @@
 const GOAL_STATE = "012345678";
-let INITIAL_STATE = "120345678";
+let INITIAL_STATE = "012345678";
 
 class TreeNode {
   constructor(state, depth,parent=null) {

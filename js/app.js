@@ -26,7 +26,7 @@ const randomState = () => {
       clearInterval(Interval);
       INITIAL_STATE = nextState
     }
-  }, 50);
+  }, 100);
 
 };
 
