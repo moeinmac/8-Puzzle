@@ -1,5 +1,6 @@
 let frontier = [];
 const expandedNodes = [];
+let soloutionNode;
 
 const search = (heuristic) => {
   let currentNode = new TreeNode(INITIAL_STATE, 0);
@@ -14,14 +15,17 @@ const search = (heuristic) => {
 
     currentNode = frontier[bestNodeIndex]
   }
+  INITIAL_STATE = currentNode.state
+  soloutionNode = currentNode
   const optimalPath = findOptimalPath(currentNode);
   const opInt = setInterval(() => {
-    if(optimalPath.length <= 1) clearInterval(opInt)
+    if(optimalPath.length <= 1){
+      clearInterval(opInt)
+      isSolveButton(true);
+    }
     Board.draw(optimalPath[0])
     optimalPath.shift()
   }, 500);
-  
-  
 };
 
 const filterFronier = (frontier,lastExpanded) => {

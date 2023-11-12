@@ -7,7 +7,6 @@ class TreeNode {
     this.depth = depth;
     this.parent = parent
   }
-
   nextState() {
     const actions = this.getActions();
     const zero = this.state.indexOf("0");
