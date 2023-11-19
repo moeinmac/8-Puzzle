@@ -11,7 +11,6 @@ const Board = {
       tiles[item].style.gridColumn = `${col + 1} / ${col + 2} `;
     });
   },
-  
 };
 
 document.addEventListener("DOMContentLoaded", Board.draw(INITIAL_STATE));

@@ -1,8 +1,10 @@
 let frontier = [];
-const expandedNodes = [];
+let expandedNodes = [];
 let soloutionNode;
 
 const search = (heuristic) => {
+  frontier = [];
+  expandedNodes = [];
   let currentNode = new TreeNode(INITIAL_STATE, 0);
   while(currentNode.state !== GOAL_STATE){
     frontier = [...frontier, ...currentNode.expand()];
